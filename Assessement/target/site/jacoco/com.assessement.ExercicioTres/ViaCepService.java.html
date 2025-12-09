@@ -10,32 +10,32 @@ import java.net.URL;
     private static final String URL_BASE = &quot;https://viacep.com.br/ws/&quot;;
     
     public static String buscarCep(String cep) throws Exception {
-<span class="nc" id="L13">        String urlCompleta = URL_BASE + cep + &quot;/json/&quot;;</span>
+<span class="fc" id="L13">        String urlCompleta = URL_BASE + cep + &quot;/json/&quot;;</span>
         
-<span class="nc" id="L15">        URL url = new URL(urlCompleta);</span>
-<span class="nc" id="L16">        HttpURLConnection conexao = (HttpURLConnection) url.openConnection();</span>
-<span class="nc" id="L17">        conexao.setRequestMethod(&quot;GET&quot;);</span>
-<span class="nc" id="L18">        conexao.setConnectTimeout(5000);</span>
-<span class="nc" id="L19">        conexao.setReadTimeout(5000);</span>
+<span class="fc" id="L15">        URL url = new URL(urlCompleta);</span>
+<span class="fc" id="L16">        HttpURLConnection conexao = (HttpURLConnection) url.openConnection();</span>
+<span class="fc" id="L17">        conexao.setRequestMethod(&quot;GET&quot;);</span>
+<span class="fc" id="L18">        conexao.setConnectTimeout(5000);</span>
+<span class="fc" id="L19">        conexao.setReadTimeout(5000);</span>
         
-<span class="nc" id="L21">        int codigoResposta = conexao.getResponseCode();</span>
+<span class="fc" id="L21">        int codigoResposta = conexao.getResponseCode();</span>
         
-<span class="nc bnc" id="L23" title="All 2 branches missed.">        if (codigoResposta == 200) {</span>
-<span class="nc" id="L24">            BufferedReader leitor = new BufferedReader(</span>
-<span class="nc" id="L25">                new InputStreamReader(conexao.getInputStream())</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        if (codigoResposta == 200) {</span>
+<span class="fc" id="L24">            BufferedReader leitor = new BufferedReader(</span>
+<span class="fc" id="L25">                new InputStreamReader(conexao.getInputStream())</span>
             );
             
-<span class="nc" id="L28">            StringBuilder response = new StringBuilder();</span>
+<span class="fc" id="L28">            StringBuilder response = new StringBuilder();</span>
             String linha;
             
-<span class="nc bnc" id="L31" title="All 2 branches missed.">            while ((linha = leitor.readLine()) != null) {</span>
-<span class="nc" id="L32">                response.append(linha);</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">            while ((linha = leitor.readLine()) != null) {</span>
+<span class="fc" id="L32">                response.append(linha);</span>
             }
             
-<span class="nc" id="L35">            leitor.close();</span>
-<span class="nc" id="L36">            return response.toString();</span>
+<span class="fc" id="L35">            leitor.close();</span>
+<span class="fc" id="L36">            return response.toString();</span>
         } else {
-<span class="nc" id="L38">            throw new Exception(&quot;Erro na requisição: &quot; + codigoResposta);</span>
+<span class="fc" id="L38">            throw new Exception(&quot;Erro na requisição: &quot; + codigoResposta);</span>
         }
     }
     
