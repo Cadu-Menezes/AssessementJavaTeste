@@ -4,6 +4,7 @@ com\assessement\ExercicioUm\TestesExploratorios.class
 com\assessement\ExercicioTres\TestesEntradasInvalidas.class
 com\assessement\ExercicioQuatro\TestesLoginInvalidoPOM.class
 com\assessement\ExercicioQuatro\TestesCadastroLoginPOM.class
+com\assessement\ExercicioCinco\FactorialTest.class
 com\assessement\ExercicioUm\TestesValorLimite.class
 com\assessement\ExercicioTres\TestesConsultaEndereco.class
 com\assessement\ExercicioTres\TestesTabelaDecisao.class

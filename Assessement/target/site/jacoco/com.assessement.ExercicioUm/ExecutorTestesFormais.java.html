@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExecutorTestesFormais.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Assessement</a> &gt; <a href="index.source.html" class="el_package">com.assessement.ExercicioUm</a> &gt; <span class="el_source">ExecutorTestesFormais.java</span></div><h1>ExecutorTestesFormais.java</h1><pre class="source lang-java linenums">package com.assessement.ExercicioUm;
+
+/*
+    Executor dos Testes Formais
+    Executa todos os testes e gera relatório dos resultados
+*/
+<span class="nc" id="L7">public class ExecutorTestesFormais {</span>
+    
+<span class="nc" id="L9">    private int testesExecutados = 0;</span>
+<span class="nc" id="L10">    private int testesAprovados = 0;</span>
+<span class="nc" id="L11">    private int testesFalharam = 0;</span>
+    
+    public static void main(String[] args) {
+<span class="nc" id="L14">        ExecutorTestesFormais executor = new ExecutorTestesFormais();</span>
+<span class="nc" id="L15">        executor.executarTodosOsTestes();</span>
+<span class="nc" id="L16">    }</span>
+    
+    public void executarTodosOsTestes() {
+<span class="nc" id="L19">        System.out.println(&quot;=====================================&quot;);</span>
+<span class="nc" id="L20">        System.out.println(&quot;  EXECUÇÃO DOS TESTES FORMAIS&quot;);</span>
+<span class="nc" id="L21">        System.out.println(&quot;=====================================&quot;);</span>
+        
+        // Executa testes de partição
+<span class="nc" id="L24">        executarTestesParticao();</span>
+        
+        // Executa testes de limite
+<span class="nc" id="L27">        executarTestesLimite();</span>
+        
+        // Executa testes de valores problemáticos
+<span class="nc" id="L30">        executarTestesValoresProblematicos();</span>
+        
+        // Gera relatório final
+<span class="nc" id="L33">        gerarRelatorioFinal();</span>
+<span class="nc" id="L34">    }</span>
+    
+    private void executarTestesParticao() {
+<span class="nc" id="L37">        System.out.println(&quot;\n--- TESTES DE PARTIÇÃO DE EQUIVALÊNCIA ---&quot;);</span>
+        
+        // Teste 1: Magreza
+<span class="nc" id="L40">        testarEDocumentar(&quot;Partição Magreza&quot;, 45.0, 1.60, &quot;Magreza leve&quot;, 17.58);</span>
+        
+        // Teste 2: Saudável
+<span class="nc" id="L43">        testarEDocumentar(&quot;Partição Saudável&quot;, 70.0, 1.75, &quot;Saudável&quot;, 22.86);</span>
+        
+        // Teste 3: Sobrepeso
+<span class="nc" id="L46">        testarEDocumentar(&quot;Partição Sobrepeso&quot;, 85.0, 1.70, &quot;Sobrepeso&quot;, 29.41);</span>
+        
+        // Teste 4: Obesidade I
+<span class="nc" id="L49">        testarEDocumentar(&quot;Partição Obesidade I&quot;, 90.0, 1.65, &quot;Obesidade Grau I&quot;, 33.06);</span>
+        
+        // Teste 5: Obesidade II
+<span class="nc" id="L52">        testarEDocumentar(&quot;Partição Obesidade II&quot;, 100.0, 1.65, &quot;Obesidade Grau II&quot;, 36.73);</span>
+<span class="nc" id="L53">    }</span>
+    
+    private void executarTestesLimite() {
+<span class="nc" id="L56">        System.out.println(&quot;\n--- TESTES DE VALOR LIMITE ---&quot;);</span>
+        
+        // Testes nos limites exatos (estes provavelmente vão falhar)
+<span class="nc" id="L59">        testarEDocumentar(&quot;Limite IMC = 25.0&quot;, 72.25, 1.70, &quot;Sobrepeso&quot;, 25.00);</span>
+<span class="nc" id="L60">        testarEDocumentar(&quot;Limite IMC = 30.0&quot;, 86.70, 1.70, &quot;Obesidade Grau I&quot;, 30.00);</span>
+<span class="nc" id="L61">        testarEDocumentar(&quot;Limite IMC = 16.0&quot;, 46.24, 1.70, &quot;Magreza moderada&quot;, 16.00);</span>
+<span class="nc" id="L62">        testarEDocumentar(&quot;Limite IMC = 18.5&quot;, 53.46, 1.70, &quot;Saudável&quot;, 18.50);</span>
+        
+        // Testes logo acima/abaixo dos limites
+<span class="nc" id="L65">        testarEDocumentar(&quot;Abaixo limite 25.0&quot;, 72.22, 1.70, &quot;Saudável&quot;, 24.99);</span>
+<span class="nc" id="L66">    }</span>
+    
+    private void executarTestesValoresProblematicos() {
+<span class="nc" id="L69">        System.out.println(&quot;\n--- TESTES DE VALORES PROBLEMÁTICOS ---&quot;);</span>
+        
+        // Altura zero (divisão por zero)
+<span class="nc" id="L72">        System.out.println(&quot;Teste: Altura zero&quot;);</span>
+<span class="nc" id="L73">        double imcZero = CalculoIMC.calcularPeso(70.0, 0.0);</span>
+<span class="nc" id="L74">        String classZero = CalculoIMC.classificarIMC(imcZero);</span>
+<span class="nc" id="L75">        System.out.printf(&quot;  Resultado: IMC=%.2f, Classificação=%s\n&quot;, imcZero, classZero);</span>
+<span class="nc" id="L76">        System.out.println(&quot;  Status: ❌ FALHOU - Deveria dar erro, não Infinity&quot;);</span>
+<span class="nc" id="L77">        testesFalharam++;</span>
+<span class="nc" id="L78">        testesExecutados++;</span>
+        
+        // Peso negativo
+<span class="nc" id="L81">        System.out.println(&quot;Teste: Peso negativo&quot;);</span>
+<span class="nc" id="L82">        double imcNeg = CalculoIMC.calcularPeso(-70.0, 1.75);</span>
+<span class="nc" id="L83">        String classNeg = CalculoIMC.classificarIMC(imcNeg);</span>
+<span class="nc" id="L84">        System.out.printf(&quot;  Resultado: IMC=%.2f, Classificação=%s\n&quot;, imcNeg, classNeg);</span>
+<span class="nc" id="L85">        System.out.println(&quot;  Status: ❌ FALHOU - Deveria dar erro, não aceitar valor negativo&quot;);</span>
+<span class="nc" id="L86">        testesFalharam++;</span>
+<span class="nc" id="L87">        testesExecutados++;</span>
+<span class="nc" id="L88">    }</span>
+    
+    private void testarEDocumentar(String nomeTeste, double peso, double altura, 
+                                  String classificacaoEsperada, double imcEsperado) {
+<span class="nc" id="L92">        System.out.println(&quot;Teste: &quot; + nomeTeste);</span>
+        
+        // Executa o teste
+<span class="nc" id="L95">        double imcCalculado = CalculoIMC.calcularPeso(peso, altura);</span>
+<span class="nc" id="L96">        String classificacaoCalculada = CalculoIMC.classificarIMC(imcCalculado);</span>
+        
+        // Verifica se passou
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        boolean imcCorreto = Math.abs(imcCalculado - imcEsperado) &lt; 0.1;</span>
+<span class="nc" id="L100">        boolean classificacaoCorreta = classificacaoEsperada.equals(classificacaoCalculada);</span>
+        
+        // Documenta resultado
+<span class="nc" id="L103">        System.out.printf(&quot;  Peso: %.1fkg, Altura: %.2fm\n&quot;, peso, altura);</span>
+<span class="nc" id="L104">        System.out.printf(&quot;  IMC Esperado: %.2f | IMC Calculado: %.2f\n&quot;, imcEsperado, imcCalculado);</span>
+<span class="nc" id="L105">        System.out.printf(&quot;  Classificação Esperada: %s | Calculada: %s\n&quot;, </span>
+                         classificacaoEsperada, classificacaoCalculada);
+        
+<span class="nc bnc" id="L108" title="All 4 branches missed.">        if (imcCorreto &amp;&amp; classificacaoCorreta) {</span>
+<span class="nc" id="L109">            System.out.println(&quot;  Status: ✅ PASSOU&quot;);</span>
+<span class="nc" id="L110">            testesAprovados++;</span>
+        } else {
+<span class="nc" id="L112">            System.out.println(&quot;  Status: ❌ FALHOU&quot;);</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">            if (!imcCorreto) {</span>
+<span class="nc" id="L114">                System.out.println(&quot;    - IMC incorreto&quot;);</span>
+            }
+<span class="nc bnc" id="L116" title="All 2 branches missed.">            if (!classificacaoCorreta) {</span>
+<span class="nc" id="L117">                System.out.println(&quot;    - Classificação incorreta (provavelmente problema com ==)&quot;);</span>
+            }
+<span class="nc" id="L119">            testesFalharam++;</span>
+        }
+        
+<span class="nc" id="L122">        testesExecutados++;</span>
+<span class="nc" id="L123">        System.out.println();</span>
+<span class="nc" id="L124">    }</span>
+    
+    private void gerarRelatorioFinal() {
+<span class="nc" id="L127">        System.out.println(&quot;=====================================&quot;);</span>
+<span class="nc" id="L128">        System.out.println(&quot;        RELATÓRIO FINAL&quot;);</span>
+<span class="nc" id="L129">        System.out.println(&quot;=====================================&quot;);</span>
+<span class="nc" id="L130">        System.out.printf(&quot;Total de testes executados: %d\n&quot;, testesExecutados);</span>
+<span class="nc" id="L131">        System.out.printf(&quot;Testes aprovados: %d (%.1f%%)\n&quot;, </span>
+<span class="nc" id="L132">                         testesAprovados, (testesAprovados * 100.0 / testesExecutados));</span>
+<span class="nc" id="L133">        System.out.printf(&quot;Testes que falharam: %d (%.1f%%)\n&quot;, </span>
+<span class="nc" id="L134">                         testesFalharam, (testesFalharam * 100.0 / testesExecutados));</span>
+        
+<span class="nc" id="L136">        System.out.println(&quot;\n--- PRINCIPAIS PROBLEMAS IDENTIFICADOS ---&quot;);</span>
+<span class="nc" id="L137">        System.out.println(&quot;1. Uso inadequado de == para comparar doubles&quot;);</span>
+<span class="nc" id="L138">        System.out.println(&quot;2. Falta de validação para altura zero&quot;);</span>
+<span class="nc" id="L139">        System.out.println(&quot;3. Falta de validação para valores negativos&quot;);</span>
+<span class="nc" id="L140">        System.out.println(&quot;4. Sistema aceita valores irreais sem validação&quot;);</span>
+        
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        if (testesFalharam &gt; 0) {</span>
+<span class="nc" id="L143">            System.out.println(&quot;\nCONCLUSÃO: O sistema apresenta falhas!&quot;);</span>
+        } else {
+<span class="nc" id="L145">            System.out.println(&quot;\nCONCLUSÃO: Todos os testes passaram!&quot;);</span>
+        }
+<span class="nc" id="L147">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Teste.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Assessement</a> &gt; <a href="index.source.html" class="el_package">com.assessement.ExercicioUm</a> &gt; <span class="el_source">Teste.java</span></div><h1>Teste.java</h1><pre class="source lang-java linenums">package com.assessement.ExercicioUm;
+
+<span class="nc" id="L3">public class Teste {</span>
+    public static void main(String[] args) {
+<span class="nc" id="L5">        System.out.println(&quot;=== TESTE DE COMPORTAMENTO - REGISTRO DE FALHAS ===\n&quot;);</span>
+        
+<span class="nc" id="L7">        System.out.println(&quot;1. TESTE COM VALORES EXATOS NOS LIMITES:&quot;);</span>
+<span class="nc" id="L8">        testarLimites();</span>
+        
+<span class="nc" id="L10">        System.out.println(&quot;\n2. TESTE COM VALORES PROBLEMATICOS:&quot;);</span>
+<span class="nc" id="L11">        testarValoresProblematicos();</span>
+        
+<span class="nc" id="L13">        System.out.println(&quot;\n3. TESTE COM VALORES EXTREMOS:&quot;);</span>
+<span class="nc" id="L14">        testarValoresExtremos();</span>
+<span class="nc" id="L15">    }</span>
+    
+    static void testarLimites() {
+        // Teste do problema com == em doubles
+<span class="nc" id="L19">        double peso = 72.25;</span>
+<span class="nc" id="L20">        double altura = 1.70;</span>
+<span class="nc" id="L21">        double imc = CalculoIMC.calcularPeso(peso, altura); // 25.0 exato</span>
+<span class="nc" id="L22">        String classificacao = CalculoIMC.classificarIMC(imc);</span>
+        
+<span class="nc" id="L24">        System.out.printf(&quot;IMC = %.10f (deveria ser exatamente 25.0)\n&quot;, imc);</span>
+<span class="nc" id="L25">        System.out.printf(&quot;Classificacao: %s\n&quot;, classificacao);</span>
+<span class="nc" id="L26">        System.out.printf(&quot;PROBLEMA: IMC = 25.0 pode nao ser classificado corretamente devido ao uso de ==\n&quot;);</span>
+<span class="nc" id="L27">    }</span>
+    
+    static void testarValoresProblematicos() {
+<span class="nc" id="L30">        System.out.println(&quot;a) Altura zero (divisao por zero):&quot;);</span>
+<span class="nc" id="L31">        double imc1 = CalculoIMC.calcularPeso(70.0, 0.0);</span>
+<span class="nc" id="L32">        System.out.printf(&quot;   IMC com altura = 0: %s\n&quot;, imc1);</span>
+<span class="nc" id="L33">        System.out.printf(&quot;   Classificacao: %s\n&quot;, CalculoIMC.classificarIMC(imc1));</span>
+        
+<span class="nc" id="L35">        System.out.println(&quot;\nb) Peso negativo:&quot;);</span>
+<span class="nc" id="L36">        double imc2 = CalculoIMC.calcularPeso(-70.0, 1.75);</span>
+<span class="nc" id="L37">        System.out.printf(&quot;   IMC com peso negativo: %.2f\n&quot;, imc2);</span>
+<span class="nc" id="L38">        System.out.printf(&quot;   Classificacao: %s\n&quot;, CalculoIMC.classificarIMC(imc2));</span>
+        
+<span class="nc" id="L40">        System.out.println(&quot;\nc) Altura negativa:&quot;);</span>
+<span class="nc" id="L41">        double imc3 = CalculoIMC.calcularPeso(70.0, -1.75);</span>
+<span class="nc" id="L42">        System.out.printf(&quot;   IMC com altura negativa: %.2f\n&quot;, imc3);</span>
+<span class="nc" id="L43">        System.out.printf(&quot;   Classificacao: %s\n&quot;, CalculoIMC.classificarIMC(imc3));</span>
+<span class="nc" id="L44">    }</span>
+    
+    static void testarValoresExtremos() {
+<span class="nc" id="L47">        System.out.println(&quot;a) Valores muito pequenos:&quot;);</span>
+<span class="nc" id="L48">        double imc1 = CalculoIMC.calcularPeso(0.1, 0.1);</span>
+<span class="nc" id="L49">        System.out.printf(&quot;   IMC: %.2f, Classificacao: %s\n&quot;, imc1, CalculoIMC.classificarIMC(imc1));</span>
+        
+<span class="nc" id="L51">        System.out.println(&quot;\nb) Valores muito grandes:&quot;);</span>
+<span class="nc" id="L52">        double imc2 = CalculoIMC.calcularPeso(1000.0, 3.0);</span>
+<span class="nc" id="L53">        System.out.printf(&quot;   IMC: %.2f, Classificacao: %s\n&quot;, imc2, CalculoIMC.classificarIMC(imc2));</span>
+<span class="nc" id="L54">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

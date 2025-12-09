@@ -5,6 +5,7 @@ com\assessement\ExercicioDois\MathFunctions.class
 com\assessement\ExercicioQuatro\pages\LoginPage.class
 com\assessement\ExercicioQuatro\pages\HomePage.class
 com\assessement\ExercicioUm\Teste.class
+com\assessement\ExercicioCinco\Factorial.class
 com\assessement\ExercicioQuatro\pages\SignupPage.class
 com\assessement\ExercicioTres\ViaCepService.class
 com\assessement\ExercicioUm\CalculoIMC.class
